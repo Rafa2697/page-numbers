@@ -45,7 +45,7 @@ export default function Home() {
         description: "Clique no número para ver mais detalhes",
       })
     }, 1000);
-  },[])
+  },[toast])
 
   return (
     <>
