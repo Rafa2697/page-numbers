@@ -4,7 +4,6 @@ import numeros from "@/data/numeros";
 import { useState, ReactNode, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast"
-
 //função que vai renderizar os numeros na função principal
 const Item = ({ numero }: { numero: { numero: ReactNode; string: string; ativo: boolean; local: string; image: string } }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +16,7 @@ const Item = ({ numero }: { numero: { numero: ReactNode; string: string; ativo: 
     <div className="bg-slate-800 p-2 rounded-lg flex justify-center mt-2 hover:bg-gray-900 shadow-md">
       <HoverCard open={isOpen} onOpenChange={setIsOpen} openDelay={2}>
         <HoverCardTrigger onClick={handleToggle} className="text-white cursor-pointer text-xl">
-          {numero.numero}
+          <p>{numero.numero}</p>
         </HoverCardTrigger>
         <HoverCardContent >
           <Avatar>
