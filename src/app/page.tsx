@@ -3,11 +3,8 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/h
 import numeros from "@/data/numeros";
 import { useState, ReactNode } from "react";
 
-const Item = ({ numero }: {
-  numero: {
-    numero: ReactNode; string: string; ativo: boolean; local: string;
-  }
-}) => {
+//função que vai renderizar os numeros na função principal
+const Item = ({ numero }: {numero: { numero: ReactNode; string: string; ativo: boolean; local: string; }}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -17,7 +14,7 @@ const Item = ({ numero }: {
   return (
     <div className="bg-slate-800 p-2 rounded-lg flex justify-center mt-2 hover:bg-gray-900 shadow-md">
       <HoverCard open={isOpen} onOpenChange={setIsOpen} openDelay={2}>
-        <HoverCardTrigger onClick={handleToggle} className="text-white cursor-pointer ">
+        <HoverCardTrigger onClick={handleToggle} className="text-white cursor-pointer text-xl">
           {numero.numero}
         </HoverCardTrigger>
         <HoverCardContent >
@@ -29,9 +26,11 @@ const Item = ({ numero }: {
     </div>
   );
 };
+
+//função do componente
 export default function Home() {
   return (
-    <div className="bg-slate-400 w-40 md:w-1/2 h-4/5 flex items-center justify-center rounded-lg shadow-xl">
+    <div className="bg-slate-400 w-full md:w-1/2 h-full md:h-4/5 flex items-center justify-center md:rounded-lg shadow-xl">
       <ul className="flex flex-col justify-evenly h-full">
         {numeros.map((numero, index) => (
           <li key={index}>
