@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "./header/page";
 
 export const metadata: Metadata = {
   title: "Contatos FPBE",
@@ -12,10 +13,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="900 flex justify-center items-center">
-        {children}
+    <html lang="en" className="h-full">
+      <body className="flex flex-col h-full">
+        <Header />
+        <main className="flex flex-1 justify-center items-center flex-col overflow-y-auto">
+          {children}
+        </main>
+        <footer>
+        <p className="text-center md:p-4">&copy;Rafael &copy;UNISEPE</p>
+      </footer>
       </body>
+      
     </html>
   );
 }
