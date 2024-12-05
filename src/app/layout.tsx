@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./header/page";
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Contatos FPBE",
@@ -19,6 +20,7 @@ export default function RootLayout({
         <main className="flex flex-1 justify-center items-center flex-col overflow-y-auto">
           {children}
         </main>
+        <Toaster />
         <footer>
         <p className="text-center md:p-4">&copy;Rafael &copy;UNISEPE</p>
       </footer>

@@ -1,8 +1,9 @@
 'use client'
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import numeros from "@/data/numeros";
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast"
 
 //função que vai renderizar os numeros na função principal
 const Item = ({ numero }: { numero: { numero: ReactNode; string: string; ativo: boolean; local: string; image: string } }) => {
@@ -35,18 +36,29 @@ const Item = ({ numero }: { numero: { numero: ReactNode; string: string; ativo: 
 
 //função do componente
 export default function Home() {
+  const { toast } = useToast()
+
+  useEffect(() => {
+    setTimeout(() => {
+      toast({
+        title: "Dica",
+        description: "Clique no número para ver mais detalhes",
+      })
+    }, 1000);
+  },[])
+
   return (
     <>
 
       <div className=" w-full md:w-1/2 h-full md:h-4/5 flex items-center justify-center">
-
-        <ul className="flex flex-col justify-evenly h-full">
+        <ul className="flex flex-col justify-evenly h-full" >
           {numeros.map((numero, index) => (
             <li key={index}>
               <Item numero={{ ...numero, string: '', image: numero.imag }} />
             </li>
           ))}
         </ul>
+       
       </div>
     </>
 
