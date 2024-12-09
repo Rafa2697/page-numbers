@@ -4,6 +4,8 @@ import numeros from "@/data/numeros";
 import { useState, ReactNode, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast"
+
+
 //função que vai renderizar os numeros na função principal
 const Item = ({ numero }: { numero: { numero: ReactNode; string: string; ativo: boolean; local: string; image: string } }) => {
   const [isOpen, setIsOpen] = useState(false);
