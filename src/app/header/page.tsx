@@ -1,4 +1,5 @@
 
+
 'use client'
 import { useRouter, usePathname } from 'next/navigation'
 import { CiLogin } from "react-icons/ci";
@@ -7,7 +8,7 @@ import Link from "next/link";
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
-  const isLoginRoute = pathname === '/login';
+  const isLoginRoute = pathname === '/login' || pathname === '/dashboard';
 
   return (
     <header className="bg-slate-800 text-white p-4 grid grid-cols-3 w-screen items-center">

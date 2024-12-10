@@ -1,58 +1,39 @@
 'use client'
 import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast"
+import { useForm } from 'react-hook-form';
 
 export default function Login() {
-    const [formData, setFormData] = useState({ email: "", password: "" });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const { register, handleSubmit } = useForm<{ email: string; senha: string }>()
     const router = useRouter();
-    const { toast } = useToast()
+    const { status } = useSession()
 
-
-
-    const handleChange = (e: { target: { name: any; value: any; }; }) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
+    async function handleSignIn(data: { email: string; senha: string }) {
         setLoading(true);
-        setError("");
-
         try {
-            const response = await fetch("https://api-numbers-unisepe.onrender.com/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
+            const result = await signIn('credentials', {
+                redirect: false,
+                email: data.email,
+                password: data.senha
             });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || "Erro ao fazer login");
+            if (result?.error) {
+                setError(result.error);
             }
-            toast({
-                title: "Autenticação bem-sucedida",
-                description: "Direcioando para o dashboard...",
-            })
-
-
-            router.push('/dashboard')
-
-        } catch (err: unknown) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError("Algo deu errado");
-            }
+        } catch (error) {
+            setError("Ocorreu um erro durante o login.");
         } finally {
             setLoading(false);
+            console.log(status)
         }
-    };
+       
+    }
+    if (status === "authenticated") {
+        router.push("/dashboard");
+    }
+    
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
@@ -60,7 +41,7 @@ export default function Login() {
                 {error && (
                     <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
                 )}
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit(handleSignIn)} className="space-y-4">
                     <div>
                         <label
                             htmlFor="email"
@@ -68,13 +49,10 @@ export default function Login() {
                         >
                             Email
                         </label>
-                        <input
+                        <input {...register('email')}
                             type="email"
                             id="email"
-                            name="email"
                             required
-                            value={formData.email}
-                            onChange={handleChange}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             placeholder="Digite seu email"
                         />
@@ -82,18 +60,15 @@ export default function Login() {
 
                     <div>
                         <label
-                            htmlFor="password"
+                            htmlFor="senha"
                             className="block text-sm font-medium text-gray-700"
                         >
                             Senha
                         </label>
-                        <input
+                        <input  {...register('senha')}
                             type="password"
-                            id="password"
-                            name="password"
+                            id="senha"
                             required
-                            value={formData.password}
-                            onChange={handleChange}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             placeholder="Digite sua senha"
                         />
