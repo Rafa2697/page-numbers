@@ -5,6 +5,7 @@ const handle = NextAuth({
   session: {
     strategy: "jwt",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -59,5 +60,4 @@ const handle = NextAuth({
     signIn: "/login",
   },
 });
-
 export { handle as GET, handle as POST };
