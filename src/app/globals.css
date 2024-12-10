@@ -66,6 +66,18 @@
 @layer base {
   * {
     @apply border-border;
+    ::-webkit-scrollbar {
+      width: 4px; /* Largura da barra */
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #ccc; /* Cor do indicador */
+     
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f9f9f9; /* Cor da trilha */
+    }
   }
   body {
     @apply bg-background text-foreground;

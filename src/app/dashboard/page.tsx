@@ -27,7 +27,7 @@ export default function Dashboard() {
     
    
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center gap-3 h-auto overflow-y-auto">
         <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
         <Formulario />
         <button onClick={handleSignOut} className="bg-red-500 text-white px-4 py-2 rounded-md">Sair</button>

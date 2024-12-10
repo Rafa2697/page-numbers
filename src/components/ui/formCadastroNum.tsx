@@ -100,13 +100,13 @@ export default function NumberManager() {
   };
 
   return (
-    <div className=" mx-auto p-6 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className=" mx-auto p-6 bg-white border shadow-md rounded-lg overflow-y-scroll md:overflow-hidden md:h-full">
       <h1 className="text-xl font-bold mb-4">Gerenciador de Números</h1>
 
-      <div className="flex  gap-4 overflow-hidden">
+      <div className="flex flex-col md:flex-row gap-4 ">
           {/* Formulário */}
           <form onSubmit={handleSubmit} className="mb-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
               <div>
                 <label htmlFor="number" className="block text-sm font-medium text-gray-700">
                   Número
@@ -165,7 +165,7 @@ export default function NumberManager() {
             </div>
             <button
               type="submit"
-              className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md"
+              className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md" 
             >
               {editingId ? "Atualizar" : "Cadastrar"}
             </button>
@@ -175,11 +175,11 @@ export default function NumberManager() {
             <p>Carregando...</p>
           ) : (
             
-                <ul className="space-y-4 overflow-y-scroll h-64">
+                <ul className="space-y-4  overflow-y-scroll h-[250px]">
                   {data.map((item) => (
                     <li
                       key={item._id}
-                      className="flex items-center justify-between p-4 border border-gray-300 rounded-md"
+                      className="flex items-center justify-between p-4 border border-teal-950 rounded-md"
                     >
                       <div>
                         <p className="text-lg font-medium">{item.number}</p>
